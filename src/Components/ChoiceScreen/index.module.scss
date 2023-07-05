@@ -21,6 +21,7 @@
   max-width: 1050px;
   flex-wrap: wrap;
   justify-content: space-between;
+  position: relative;
 }
 
 .character {
@@ -66,6 +67,27 @@
   max-width: 100%;
   height: auto;
   margin: auto;
+}
+
+.stances {
+  position: absolute;
+  left: -150px;
+  bottom: -20px;
+  display: flex;
+  width: calc(100% + 300px);
+  justify-content: space-between;
+}
+
+.stance {
+  width: 200px;
+
+  &.stanceSecond {
+    transform: scale(-1, 1);
+  }
+}
+
+.stanceImage {
+  width: 100%;
 }
 
 .location {
