@@ -1,9 +1,7 @@
 import styles from './index.module.scss';
 
 function LoadingFightScreen() {
-    return <div className={styles.root}>
-        LoadingFightScreen
-    </div>
+    return <div className={styles.root}/>
 }
 
 export default LoadingFightScreen;

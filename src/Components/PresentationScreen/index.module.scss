@@ -1,1 +1,52 @@
-.root {}
+.root {
+  background: url("./images/background.png");
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.characters {
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.character {
+  width: 600px;
+
+  &.characterSecond {
+    transform: scale(-1, 1);
+  }
+}
+
+.characterImage {
+  width: 100%;
+}
+
+.codes {
+  position: absolute;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  bottom: 100px;
+  margin: 0 auto;
+  border: 3px solid #494949;
+  border-radius: 5px;
+}
+
+.code {
+  border: 3px solid #494949;
+  display: flex;
+}
+
+.codeImage {
+  width: 63px;
+  height: auto;
+  border-radius: 5px;
+}

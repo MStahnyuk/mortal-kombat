@@ -3,20 +3,30 @@ import PresentationScreen from "./Components/PresentationScreen";
 import LoadingFightScreen from "./Components/LoadingFightScreen";
 import {useState} from "react";
 
-const screens = [
-    <ChoiceScreen/>,
-    <PresentationScreen/>,
-    <LoadingFightScreen/>
-
-]
-
 function App() {
-    const [activeScreen, setActiveScreen] = useState(screens[0]);
-  return (
-    <div className="App">
-        {activeScreen}
-    </div>
-  );
+    const [activeScreenId, setActiveScreenId] = useState('choiceScreen');
+    const [characterFirst, setCharacterFirst] = useState();
+    const [characterSecond, setCharacterSecond] = useState();
+
+    const handleSelectedCharacters = ([newCharacterFirst, newCharacterSecond]) => {
+        setActiveScreenId('presentationScreen');
+        setCharacterFirst(newCharacterFirst);
+        setCharacterSecond(newCharacterSecond);
+    };
+
+    return (
+        <div className="App">
+            {activeScreenId === 'choiceScreen' && <ChoiceScreen
+                onSelected={handleSelectedCharacters}
+            />}
+            {activeScreenId === 'presentationScreen' && <PresentationScreen
+                characterFirst={characterFirst}
+                characterSecond={characterSecond}
+                onTimeIsUp={() => setActiveScreenId('loadingFightScreen')}
+            />}
+            {activeScreenId === 'loadingFightScreen' && <LoadingFightScreen/>}
+        </div>
+    );
 }
 
 export default App;

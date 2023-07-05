@@ -133,13 +133,16 @@ let charactersMatrix = [
     ]
 ]
 
-function ChoiceScreen() {
+function ChoiceScreen({ onSelected }) {
     const [playerFirst, setPlayerFirst] = useState({ row: 0, column: 0, isSelected: false });
     const [playerSecond, setPlayerSecond] = useState({ row: 0, column: 4, isSelected: false });
 
     useEffect(() => {
         if (playerFirst.isSelected && playerSecond.isSelected) {
-            setTimeout(() => console.log('Selected two characters!'), 2000);
+            setTimeout(() => onSelected([
+                charactersMatrix[playerFirst.row][playerFirst.column],
+                charactersMatrix[playerSecond.row][playerSecond.column],
+            ]), 2000);
         }
     }, [playerFirst.isSelected, playerSecond.isSelected]);
 
