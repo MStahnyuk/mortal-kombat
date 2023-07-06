@@ -1,36 +1,17 @@
-import styles from './index.module.scss';
+import { useEffect, useState } from "react";
 import classNames from "classnames";
+import styles from './index.module.scss';
 
-import ImageCode0 from './images/codes/0.gif';
-import ImageCode1 from './images/codes/1.gif';
-import ImageCode2 from './images/codes/2.gif';
-import ImageCode3 from './images/codes/3.gif';
-import ImageCode4 from './images/codes/4.gif';
-import ImageCode5 from './images/codes/5.gif';
-import ImageCode6 from './images/codes/6.gif';
-import ImageCode7 from './images/codes/7.gif';
-import ImageCode8 from './images/codes/8.gif';
-import ImageCode9 from './images/codes/9.gif';
-import {useEffect, useState} from "react";
+import { MAPPED_CODE_IMAGE_BY_VALUE, CODE_MESSAGES } from "./data";
 
-const mappedCodeImageByValue = {
-    0: ImageCode0,
-    1: ImageCode1,
-    2: ImageCode2,
-    3: ImageCode3,
-    4: ImageCode4,
-    5: ImageCode5,
-    6: ImageCode6,
-    7: ImageCode7,
-    8: ImageCode8,
-    9: ImageCode9
-}
+const WAIT_TIME_MILLISECONDS = 4000;
 
 function PresentationScreen({ onTimeIsUp, characterFirst, characterSecond }) {
-    const [codes, setCodes] = useState({ 0: 0, 1: 0, 2:0, 3:0, 4:0, 5:0});
+    const [codes, setCodes] = useState({ 0: 0, 1: 0, 2:0, 3:0, 4:0, 5:0 });
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
-        setTimeout(onTimeIsUp, 4000);
+        setTimeout(onTimeIsUp, WAIT_TIME_MILLISECONDS);
     });
 
     useEffect(() => {
@@ -40,6 +21,17 @@ function PresentationScreen({ onTimeIsUp, characterFirst, characterSecond }) {
             document.removeEventListener('keydown', keydownHandler)
         }
     });
+
+    useEffect(() => {
+        const codeMessageKey = Object.values(codes).join('');
+
+        if (CODE_MESSAGES[codeMessageKey]) {
+            setMessage(CODE_MESSAGES[codeMessageKey]);
+        } else {
+            setMessage('');
+        }
+
+    }, [codes]);
 
     const keydownHandler = (event) => {
         let codeIndex;
@@ -65,13 +57,16 @@ function PresentationScreen({ onTimeIsUp, characterFirst, characterSecond }) {
         }
 
         if (typeof codeIndex === 'number') {
-            setCodes({ ...codes, [codeIndex]: codes[codeIndex] + 1 });
+            const newCode = codes[codeIndex] + 1;
+            setCodes({ ...codes, [codeIndex]: newCode === 10 ? 0 : newCode });
         }
     }
 
     return <div className={styles.root}>
-        {/*<h1>Battle 1</h1>*/}
-        {/*<span>VS</span>*/}
+        <div className={styles.text}>
+            <h1 className={styles.title}>Battle 1</h1>
+            <span className={styles.vs}>VS</span>
+        </div>
         <div className={styles.characters}>
             <div className={styles.character}>
                 <img className={styles.characterImage} src={characterFirst.avatar} alt=""/>
@@ -82,9 +77,10 @@ function PresentationScreen({ onTimeIsUp, characterFirst, characterSecond }) {
         </div>
         <div className={styles.codes}>
             {Object.values(codes).map((value, index) => <div className={styles.code} key={index}>
-                <img className={styles.codeImage} src={mappedCodeImageByValue[value]} alt=""/>
+                <img className={styles.codeImage} src={MAPPED_CODE_IMAGE_BY_VALUE[value]} alt=""/>
             </div>)}
         </div>
+        {message && <div className={styles.message}>{message}</div>}
     </div>
 }
 

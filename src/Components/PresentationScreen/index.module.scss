@@ -8,6 +8,26 @@
   justify-content: center;
 }
 
+.text {
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 5px 3px 3px black;
+  text-transform: uppercase;
+  margin-top: 60px;
+  text-align: center;
+}
+
+.title {
+  font-size: inherit;
+}
+
+.vs {
+  display: block;
+  margin-top: 100px;
+}
+
 .characters {
   position: absolute;
   left: 0;
@@ -34,7 +54,7 @@
   background-size: cover;
   display: flex;
   justify-content: space-between;
-  bottom: 100px;
+  bottom: 200px;
   margin: 0 auto;
   border: 3px solid #494949;
   border-radius: 5px;
@@ -49,4 +69,14 @@
   width: 63px;
   height: auto;
   border-radius: 5px;
+}
+
+.message {
+  position: absolute;
+  bottom: 100px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 5px 3px 3px black;
 }
