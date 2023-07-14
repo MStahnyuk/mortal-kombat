@@ -1,6 +1,6 @@
-import ChoiceScreen from "./components/ChoiceScreen";
-import PresentationScreen from "./components/PresentationScreen";
-import LoadingFightScreen from "./components/LoadingFightScreen";
+import ChoiceScreen from "./Components/ChoiceScreen";
+import PresentationScreen from "./Components/PresentationScreen";
+import LoadingFightScreen from "./Components/LoadingFightScreen";
 import {useState} from "react";
 import {SCREEN_IDS} from "./constants";
 
